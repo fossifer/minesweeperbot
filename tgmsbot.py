@@ -348,14 +348,14 @@ def gen_reward(user, base, negative=True):
         else:
             return max(1, int(base * __floating(log(cardnum, 2))))
     def __get_cards(cardnum):
+        cards = base * __floating(1 / log(cardnum, 100))
         if cardnum >= 2:
-            cards = base * __floating(1 / log(cardnum, 100))
             if cards > 1.0:
                 return int(cards)
             else:
                 return int(__chance(cards))
         else:
-            return int(__floating(8.0))
+            return max(int(__floating(8.0)), cards)
     # Negative rewards
     def restrict_mining(player):
         lost_cards = __lose_cards(player.immunity_cards)
