@@ -1,5 +1,5 @@
 # minesweeperbot
-A Telegram Minesweeper game bot, currently runs as [@P4MinesweeperBot](t.me/P4MinesweeperBot), which is a clone of [@mine_sweeper_bot](t.me/mine_sweeper_bot) and [@archcnmsbot](t.me/archcnmsbot).
+A Telegram Minesweeper game bot, currently runs as [@P4MinesweeperBot](https://t.me/P4MinesweeperBot), which is a clone of [@mine_sweeper_bot](https://t.me/mine_sweeper_bot) and [@archcnmsbot](https://t.me/archcnmsbot).
 
 ## New Features
 * Guess-free map generation if possible - No more painful 50/50 at the end!
