@@ -326,7 +326,7 @@ def send_help(update, context):
 
 def send_source(update, context):
     logger.debug("Source from {0}".format(update.message.from_user.id))
-    update.message.reply_text('Source code: https://git.jerryxiao.cc/Jerry/tgmsbot')
+    update.message.reply_text('Source code: https://github.com/fossifer/minesweeperbot\nCredits to: https://git.jerryxiao.cc/Jerry/tgmsbot and https://github.com/gamescomputersplay/minesweeper-solver')
 
 def send_status(update, context):
     logger.info("Status from {0}".format(update.message.from_user.id))
