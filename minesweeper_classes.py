@@ -203,7 +203,7 @@ def all_mines_positions(cells_count, mines_to_set):
     [(True, False), (False, True)]
     '''
 
-    def recursive_choose_generator(current_combination, mines_to_set):
+    def recursive_choose_generator(current_combination, mines_to_set, start):
         ''' Recursive part of "Choose without replacement" permutation
         generator, results are put into outside "result" variable
         '''
@@ -212,17 +212,15 @@ def all_mines_positions(cells_count, mines_to_set):
             result.add(tuple(current_combination))
             return
 
-        for position, item in enumerate(current_combination):
-            # Find all the "False" (not a mine) cells
-            if not item:
-                # Put a mine in it, go to the next recursion level
-                current_copy = current_combination.copy()
-                current_copy[position] = True
-                recursive_choose_generator(current_copy, mines_to_set - 1)
+        for position in range(start, len(current_combination)):
+            # Put a mine in it, go to the next recursion level
+            current_combination[position] = True
+            recursive_choose_generator(current_combination, mines_to_set - 1, position + 1)
+            current_combination[position] = False
 
     result = set()
     all_cells_false = [False for _ in range(cells_count)]
-    recursive_choose_generator(all_cells_false, mines_to_set)
+    recursive_choose_generator(all_cells_false, mines_to_set, 0)
     return result
 
 
