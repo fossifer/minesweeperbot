@@ -57,6 +57,13 @@ STEP_TEXT_TEMPLATE = "{last_player} 踩到了地雷!\n" \
                     "时间{time}秒，超时{timeouts}次\n\n" \
                     "{last_player} {reward}\n\n" \
                     "雷区生命值：({remain}/{ttl})"
+STEP_WIN_TEXT_TEMPLATE = "{last_player} 踩到了地雷，但是也打开了所有奇怪的地方…好羞羞\n" \
+                    "地图：Op {s_op} / Is {s_is} / 3bv {s_3bv}\n操作总数 {ops_count}\n" \
+                    "统计：\n{ops_list}\n\n{last_player} 你要对人家负责哟/// ///\n\n" \
+                    "用时{time}秒，超时{timeouts}次\n\n" \
+                    "{last_player} {reward}\n\n" \
+                    "雷区生命值：({remain}/{ttl})\n\n" \
+                    "/mine 开始新游戏"
 LOSE_TEXT_TEMPLATE = "一道火光之后，你就在天上飞了呢…好奇怪喵\n" \
                     "地图：Op {s_op} / Is {s_is} / 3bv {s_3bv}\n操作总数 {ops_count}\n" \
                     "统计：\n{ops_list}\n\n{last_player} 是我们中出的叛徒！\n\n" \
@@ -527,6 +534,12 @@ def handle_button_click(update, context):
                 game.lives -= 1
                 if game.lives <= 0:
                     template = LOSE_TEXT_TEMPLATE
+                elif board.mines_opened == board.mines:
+                    board.state = 2
+                    reward += '；' + gen_reward(game.last_player, s_3bv / 2, negative=False)
+                    remain = game.lives
+                    ttl = game.ttl_lives
+                    template = STEP_WIN_TEXT_TEMPLATE
                 else:
                     game.stopped = False
                     board.state = 1

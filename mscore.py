@@ -140,6 +140,8 @@ class Board():
         if not automatic and self.map[row][col] == 9:
             self.map[row][col] = DEAD
             self.state = 3
+            # update opened mines count
+            self.__do_i_win()
             return
         elif self.map[row][col] == 0:
             self.map[row][col] += 10 # open this block
